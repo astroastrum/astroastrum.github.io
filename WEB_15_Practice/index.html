@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .ball {
+      display: inline-block;
+      width: 7rem;
+      height: 7rem;
+      background-color: greenyellow;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 10rem;
+      font-size: xx-large;
+      font-weight: bold;
+    }
+
+    .ball-container {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lotto Winning Number</h1>
+  <button id="lotto-btn">Get Your Numbers of Luck</button>
+  <div id="result"></div>
+  <hr>
+  <div class="ball-container">
+    <div class="ball">1</div>
+    <div class="ball">11</div>
+    <div class="ball">21</div>
+    <div class="ball">31</div>
+    <div class="ball">30</div>
+    <div class="ball">20</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script>
+    const button = document.querySelector('#lotto-btn')
+    button.addEventListener('click', function() {
+      // 컨테이너 생성
+      const ballContainer = document.createElement('div')
+      ballContainer.classList.add('ball-container')
+      // ball 6개 생성
+      const numbers = _.sampleSize(_.range(1, 46), 6)
+      console.log(numbers)
+      const ball = document.createElement('div')
+      ball.classList.add('ball')
+      ball.innerText = numbers[0]
+      ball.style.backgroundColor = 'yellow'
+      // 컨테이너에 붙임
+      ballContainer.appendChild(ball)
+      // 컨테이너를 결과 영역에 붙임
+      const result = document.querySelector('#result')
+      result.appendChild(ballContainer)
+
+      const balls = document.querySelector("ball")
+      const color = ["yellow", "blue", "red", "grey", "green"] 
+      ball.style.backgroundColor="yellow"
+
+      button.addEventListener("click", changeColor)
+
+      function changeColor() {
+        let num = Math.floor(Math.random()*color.length);
+        let colorSelect = color[num];
+        console.log(colorSelect)
+
+      ball.style.backgroundColor=colorSelect
+      }
+    })
+  </script>
+</body>
+</html>
